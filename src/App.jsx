@@ -14,16 +14,16 @@ function App() {
   const [lat, setLat] = useState(41.697892);
   const [lng, setLng] = useState(44.827095);
 
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await axios.get(
-        `https://geo.ipify.org/api/v2/country,city?apiKey=at_dqJrOqznvItqaBPKBPQOIYZyxICsO&domain=${input}`
-      );
+  const getData = async () => {
+    const { data } = await axios.get(
+      `https://geo.ipify.org/api/v2/country,city?apiKey=at_dqJrOqznvItqaBPKBPQOIYZyxICsO&domain=${input}`
+    );
 
-      setGeoAPI(data);
-      setLat(data.location.lat);
-      setLng(data.location.lng);
-    };
+    setGeoAPI(data);
+    setLat(data.location.lat);
+    setLng(data.location.lng);
+  };
+  useEffect(() => {
     getData();
   }, []);
 
