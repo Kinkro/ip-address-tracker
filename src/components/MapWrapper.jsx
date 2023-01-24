@@ -37,7 +37,11 @@ const MapWrapper = ({ lat, lng }) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={[lat, lng]} icon={svgIcon}>
+        <Marker
+          position={[lat, lng]}
+          icon={svgIcon}
+          className="leaflet-marker-icon"
+        >
           <Popup>I am here</Popup>
         </Marker>
         <LiveLocation center={[lat, lng]} />
