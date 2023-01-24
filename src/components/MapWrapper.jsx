@@ -5,6 +5,11 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
 const MapWrapper = ({ lat, lng }) => {
+  const LiveLocation = ({ center }) => {
+    const map = useMap();
+    map.flyTo(center, 8);
+    return null;
+  };
   const svgIcon = L.divIcon({
     html: `
     <svg xmlns="http://www.w3.org/2000/svg" 
@@ -19,25 +24,20 @@ const MapWrapper = ({ lat, lng }) => {
 
   L.Marker.prototype.options.icon = svgIcon;
 
-  const LiveLocation = ({ center }) => {
-    const map = useMap();
-    map.flyTo(center, 8);
-    return null;
-  };
   return (
     <StyledMapWrapper>
       <MapContainer
         center={[lat, lng]}
         zoom={11}
         style={{ width: "100vw", height: "70vh" }}
-        scrollWheelZoom={false}
+        scrollWheelZoom={true}
         // onMapLoad={(map) => setMap(map)}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={[lat, lng]}>
+        <Marker position={[lat, lng]} icon={svgIcon}>
           <Popup>I am here</Popup>
         </Marker>
         <LiveLocation center={[lat, lng]} />
