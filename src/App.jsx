@@ -11,54 +11,30 @@ import MapWrapper from "./components/MapWrapper";
 function App() {
   const [geoAPI, setGeoAPI] = useState(null);
   const [input, setInput] = useState("");
-  const [hasFetched, setHasFetched] = useState(false);
   const [lat, setLat] = useState(41.697892);
   const [lng, setLng] = useState(44.827095);
-  // const [map, setMap] = useState(null);
 
-  // useEffect(() => {
-  //   if (map) {
-  //     map.flyto([
-  //       geoAPI ? geoAPI.location.lat : 40.0,
-  //       geoAPI ? geoAPI.location.lng : 40.0,
-  //     ]);
-  //   }
-  // }, [map]);
-
-  const getData = async () => {
-    const { data } = await axios.get(
-      `https://geo.ipify.org/api/v2/country,city?apiKey=at_dqJrOqznvItqaBPKBPQOIYZyxICsO&domain=${input}`
-    );
-
-    setGeoAPI(data);
-    setLat(data.location.lat);
-    setLng(data.location.lng);
-  };
   useEffect(() => {
+    const getData = async () => {
+      const { data } = await axios.get(
+        `https://geo.ipify.org/api/v2/country,city?apiKey=at_dqJrOqznvItqaBPKBPQOIYZyxICsO&domain=${input}`
+      );
+
+      setGeoAPI(data);
+      setLat(data.location.lat);
+      setLng(data.location.lng);
+    };
     getData();
   }, []);
-
-  // const [center, setCenter] = useState([
-  //   geoAPI.location?.lat,
-  //   geoAPI.location?.lng,
-  // ]);
 
   const handleChange = (e) => {
     setInput(e.target.value);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setPosition({
-    //   lat: 41.0,
-    //   lng: 41.52,
-    //   zoom: map.getzoom(),
-    // });
-    getData();
-    setHasFetched(false);
-  };
-  // console.log(hasFetched);
 
-  console.log(geoAPI);
+    getData();
+  };
 
   const theme = {
     colors: {
